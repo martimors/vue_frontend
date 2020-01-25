@@ -18,3 +18,9 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw?
+
+# Logs
+*.log
+
+# API key
+serviceAccountKey.json
