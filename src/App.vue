@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import * as firebaseui from "firebaseui";
+// import * as firebaseui from "firebaseui";
 import Header from "./components/layout/Header";
 export default {
   name: "app",

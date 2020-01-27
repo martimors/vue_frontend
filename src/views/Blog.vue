@@ -7,22 +7,24 @@
 
 <script>
 import Posts from "../components/Posts";
-import { db } from '../main'
-import axios from "axios";
+import { db } from "../main";
 
 export default {
-  name: 'Posts',
-  data () {
+  name: "Blog", 
+  components: {
+    Posts
+  },
+  data() {
     return {
       locations: []
-    }
+    };
   },
-  firestore () {
+  firestore() {
     return {
-      locations: db.collection('posts').orderBy('posted_datetime')
-    }
+      locations: db.collection("posts").orderBy("posted_datetime")
+    };
   }
-}
+};
 </script>
 
 <style>
