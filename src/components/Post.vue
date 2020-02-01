@@ -1,7 +1,7 @@
 <template>
   <div>
     <h3>{{post.title}}</h3>
-    <p>Created {{post.posted_datetime}} by {{post.author}}</p>
+    <p id="created">Created {{post.posted_datetime.toDate()}} by {{post.author}}</p>
     <p>{{post.body}}</p>
   </div>
 </template>
@@ -12,3 +12,8 @@ export default {
   props: ["post"]
 };
 </script>
+<style scoped>
+p#created {
+  font-size: 8pt;
+}
+</style>

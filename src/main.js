@@ -27,7 +27,7 @@ const firebaseConfig = {
   measurementId: process.env.VUE_APP_MEASUREMENT_ID
 };
 
-console.log(firebaseConfig);
+//console.log(firebaseConfig);
 
 export const db = firebase.initializeApp(firebaseConfig).firestore();
 export const auth = firebase.auth();

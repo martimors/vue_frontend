@@ -1,7 +1,7 @@
-
 <template>
   <div id="posts">
-    <Posts />
+    <h1>Blog</h1>
+    <Posts v-bind:posts="posts"/>
   </div>
 </template>
 
@@ -10,18 +10,18 @@ import Posts from "../components/Posts";
 import { db } from "../main";
 
 export default {
-  name: "Blog", 
+  name: "Blog",
   components: {
     Posts
   },
   data() {
     return {
-      locations: []
+      posts: []
     };
   },
   firestore() {
     return {
-      locations: db.collection("posts").orderBy("posted_datetime")
+      posts: db.collection("posts").orderBy("posted_datetime")
     };
   }
 };
