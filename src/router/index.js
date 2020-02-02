@@ -1,7 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
-import Blog from "../views/Blog.vue";
 
 Vue.use(VueRouter);
 
@@ -23,12 +22,14 @@ const routes = [
   {
     path: "/posts",
     name: "posts",
-    component: Blog
+    component: () => import("../views/Blog.vue")
+  },
+  {
+    path: "*",
+    component: Home
   }
 ];
 
-const router = new VueRouter({
-  routes
-});
+const router = new VueRouter({ mode: "history", routes: routes });
 
 export default router;

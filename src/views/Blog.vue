@@ -1,7 +1,12 @@
 <template>
   <div id="posts">
     <h1>Blog</h1>
-    <NewPost />
+    <button
+      v-show="!formVisible"
+      v-on:click="showForm"
+      class="btn btn-primary btn-sm btn-block"
+    >Add post</button>
+    <NewPost v-show="formVisible" v-on:add-post="addPost" />
     <Posts v-bind:posts="posts" />
   </div>
 </template>
@@ -9,7 +14,8 @@
 <script>
 import Posts from "../components/Posts";
 import NewPost from "../components/NewPost";
-import { db } from "../main";
+import { db } from "@/firebase";
+import { Timestamp } from "@/firebase";
 
 export default {
   name: "Blog",
@@ -19,7 +25,8 @@ export default {
   },
   data() {
     return {
-      posts: []
+      posts: [],
+      formVisible: false
     };
   },
   firestore() {
@@ -27,9 +34,18 @@ export default {
       posts: db.collection("posts").orderBy("posted_datetime", "desc")
     };
   },
-  created(){
-    console.log("I was created!")
-    //TODO: Maybe I have to load in a data snapshot here
+  methods: {
+    showForm() {
+      this.formVisible = !this.formVisible;
+    },
+    async addPost(newPost) {
+      await db.collection("posts").add({
+        title: newPost.title,
+        body: newPost.body,
+        posted_datetime: Timestamp.FieldValue.serverTimestamp(),
+        author: "admin"
+      });
+    }
   }
 };
 </script>
