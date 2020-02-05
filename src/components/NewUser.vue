@@ -7,6 +7,21 @@
 
         <!-- Text input-->
         <div class="form-group">
+          <label class="col-md-4 control-label" for="nickname">Nickname</label>
+          <div class="col-md-4">
+            <input
+              id="nickname"
+              name="nickname"
+              type="text"
+              placeholder="nickname"
+              class="form-control input-md"
+              required
+              v-model="nickname"
+            />
+          </div>
+        </div>
+        <!-- Text input-->
+        <div class="form-group">
           <label class="col-md-4 control-label" for="email">E-mail</label>
           <div class="col-md-4">
             <input
@@ -55,7 +70,8 @@ export default {
   data() {
     return {
       email: "",
-      password: ""
+      password: "",
+      nickname: ""
     };
   },
   methods: {
@@ -63,7 +79,8 @@ export default {
       e.preventDefault();
       const newUser = {
         email: this.email,
-        password: this.password
+        password: this.password,
+        nickname: this.nickname
       };
       // Send up to parent
       this.$emit("add-user", newUser);
