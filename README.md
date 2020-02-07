@@ -1,4 +1,5 @@
-# vue_blog
+# Simple blog with firebase
+This project is a simple blog with firebase as a backend. Just for exploration, playing around and practice.
 
 ## Project setup
 ```
