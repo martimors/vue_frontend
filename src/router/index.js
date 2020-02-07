@@ -1,22 +1,20 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home";
-import Register from "../views/Register";
-import Login from "@/views/Login"
+// import Register from "../views/Register";
+import Login from "@/views/Login";
+import About from "@/views/About";
 
 Vue.use(VueRouter);
 
+// lazy import for "complex" pages (they load separately)
+const posts = () => import(/* webpackChunkName: "about" */ "../views/Blog.vue");
+
 const routes = [
-  {
-    path: "/",
-    name: "home",
-    component: Home
-  },
-  {
-    path: "/register",
-    name: "register",
-    component: Register
-  },
+  //  {
+  //    path: "/register",
+  //    name: "register",
+  //    component: Register
+  //  },
   {
     path: "/login",
     name: "login",
@@ -28,17 +26,16 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue")
+    component: About
   },
   {
-    path: "/posts",
+    path: "/",
     name: "posts",
-    component: () => import("../views/Blog.vue")
+    component: posts
   },
   {
     path: "*",
-    component: Home
+    component: posts
   }
 ];
 

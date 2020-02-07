@@ -1,7 +1,7 @@
 <template>
   <div class="ui middle aligned center aligned grid">
     <div class="column">
-      <form class="ui large form">
+      <form class="form horizontal">
         <div class="ui stacked secondary segment">
           <div class="field">
             <div class="ui left icon input large">
@@ -20,8 +20,6 @@
         <div class="ui error message"></div>
       </form>
       <div class="ui message">
-        Don't have an account?
-        <router-link :to="{ name: 'register' }">Register</router-link>
         <!-- <button @click="signOut">SignOut</button> -->
       </div>
     </div>

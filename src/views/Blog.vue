@@ -1,6 +1,5 @@
 <template>
   <div id="posts">
-    <h1>Blog</h1>
     <button
       v-show="!formVisible"
       v-on:click="showForm"
