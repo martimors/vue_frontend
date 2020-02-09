@@ -2,7 +2,7 @@
   <div class="content">
     <h3 class="headline">{{post.title}}</h3>
     <p id="created">Created {{post.posted_datetime.toDate()}} by {{post.author}}</p>
-    <p>{{post.body}}</p>
+    <div class="posts">{{post.body}}</div>
   </div>
 </template>
 
@@ -18,5 +18,8 @@ p#created {
 }
 h3.headline {
   font-family: "Open Sans", sans-serif;
+  padding: 2em 0 0 0;
+}
+.content {
 }
 </style>

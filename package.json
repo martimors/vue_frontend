@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve": "vue-cli-service serve --host 0.0.0.0",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
@@ -12,6 +12,8 @@
     "bootstrap-vue": "^2.4.0",
     "core-js": "^3.4.4",
     "firebase": "^7.7.0",
+    "firebase-admin": "^8.9.2",
+    "firebase-functions": "^3.3.0",
     "firebaseui": "^4.4.0",
     "uuid": "^3.4.0",
     "vue": "^2.6.10",

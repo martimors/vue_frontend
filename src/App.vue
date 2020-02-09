@@ -1,49 +1,69 @@
 <template>
   <div id="app">
     <Header />
-    <router-view />
+    <div id="main-content"><router-view /></div>
+    <!--<Footer />-->
   </div>
 </template>
 
 <script>
 // import * as firebaseui from "firebaseui";
 import Header from "./components/layout/Header";
+//import Footer from "./components/layout/Footer";
 export default {
   name: "app",
   components: {
-    Header
+    Header,
+    //Footer
   }
 };
 </script>
 
 <style>
 @import url("https://fonts.googleapis.com/css?family=Montserrat|Open+Sans&display=swap");
-
+html, body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
 body {
   background-image: url("assets/bgpattern.png");
+  height: 100%;
 }
 #app {
   font-family: "Montserrat", serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+  height: auto !important;
+  min-height: 100%;
   height: 100%;
+  overflow: auto;
   max-width: 500px;
-  margin: auto;
+  position: relative;
+	margin: 0 auto;
   background-color: white;
   border-style: solid;
   border-width: 0 2px 0 2px;
   border-color: grey;
+}
+
+#main-content {
   padding: 0 1vw 0 1vw;
 }
 
 #nav {
-  padding: 2vh 0 1vh 0;
+  padding: 0 0 1vh 0;
+  word-spacing: 1.5vw;
+  margin: auto;
+  text-align: center;
+  font-size: 1.2em;
 }
 
 #nav a {
   font-weight: bold;
   color: #2c3e50;
+  text-decoration: none;
 }
 
 #nav a.router-link-exact-active {
