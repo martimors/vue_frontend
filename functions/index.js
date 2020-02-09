@@ -9,7 +9,7 @@ admin.initializeApp();
 //  response.send("Hello from Firebase!");
 // });
 
-exports.addDefaultUserRole = functions.auth.user().onCreate(async user => {
+exports.addDefaultUserRole = functions.region("europe-west1").auth.user().onCreate(async user => {
   /**
    * This sets the claim isAdmin to false for all new users.
    */
