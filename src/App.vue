@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <Header />
-    <div id="main-content"><router-view /></div>
+    <div id="main-content">
+      <router-view />
+    </div>
     <!--<Footer />-->
   </div>
 </template>
@@ -9,11 +11,12 @@
 <script>
 // import * as firebaseui from "firebaseui";
 import Header from "./components/layout/Header";
+require("vue-flash-message/dist/vue-flash-message.min.css");
 //import Footer from "./components/layout/Footer";
 export default {
   name: "app",
   components: {
-    Header,
+    Header
     //Footer
   }
 };
@@ -21,10 +24,11 @@ export default {
 
 <style>
 @import url("https://fonts.googleapis.com/css?family=Montserrat|Open+Sans&display=swap");
-html, body {
-	height: 100%;
-	margin: 0;
-	padding: 0;
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 body {
   background-image: url("assets/bgpattern.png");
@@ -41,7 +45,7 @@ body {
   overflow: auto;
   max-width: 500px;
   position: relative;
-	margin: 0 auto;
+  margin: 0 auto;
   background-color: white;
   border-style: solid;
   border-width: 0 2px 0 2px;
@@ -59,7 +63,9 @@ body {
   text-align: center;
   font-size: 1.2em;
 }
-
+a {
+  outline: none;
+}
 #nav a {
   font-weight: bold;
   color: #2c3e50;

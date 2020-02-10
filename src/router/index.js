@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-// import Register from "../views/Register";
+import Register from "../views/Register";
 import Login from "@/views/Login";
 import About from "@/views/About";
 
@@ -10,11 +10,11 @@ Vue.use(VueRouter);
 const posts = () => import(/* webpackChunkName: "about" */ "../views/Blog.vue");
 
 const routes = [
-  //  {
-  //    path: "/register",
-  //    name: "register",
-  //    component: Register
-  //  },
+  {
+    path: "/register",
+    name: "Register",
+    component: Register
+  },
   {
     path: "/login",
     name: "login",

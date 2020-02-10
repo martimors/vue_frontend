@@ -1,33 +1,16 @@
 <template>
-  <div class="ui middle aligned center aligned grid">
-    <div class="column">
-      <form class="form horizontal">
-        <div class="ui stacked secondary segment">
-          <div class="field">
-            <div class="ui left icon input large">
-              <i class="user icon"></i>
-              <input type="text" name="email" placeholder="E-mail address" v-model="email" />
-            </div>
-          </div>
-          <div class="field">
-            <div class="ui left icon input large">
-              <i class="lock icon"></i>
-              <input type="password" name="password" placeholder="Password" v-model="password" />
-            </div>
-          </div>
-          <div class="ui fluid large teal submit button" @click="loginButtonPressed">Login</div>
-        </div>
-        <div class="ui error message"></div>
-      </form>
-      <div class="ui message">
-        <!-- <button @click="signOut">SignOut</button> -->
-      </div>
-    </div>
+  <div class="login-view">
+    <LoginForm v-on:request-login="loginUser" />Don't have a user?
+    <router-link :to="{name: 'Register'}">Register</router-link>!
+    <flash-message />
   </div>
 </template>
 <script>
 import firebase from "firebase";
+import LoginForm from "@/components/LoginForm";
 export default {
+  name: "login",
+  components: { LoginForm },
   data() {
     return {
       email: "",
@@ -35,25 +18,31 @@ export default {
     };
   },
   created() {
-    firebase.auth().onAuthStateChanged(userAuth => {
+    firebase.auth().onAuthStateChanged(async userAuth => {
       if (userAuth) {
-        firebase
+        const tokenResult = await firebase
           .auth()
-          .currentUser.getIdTokenResult()
-          .then(tokenResult => {
-            console.log(tokenResult.claims);
-          });
+          .currentUser.getIdTokenResult();
+        console.log(tokenResult.claims);
+      } else {
+        console.log("!");
       }
     });
   },
   methods: {
-    async loginButtonPressed() {
+    async loginUser(loginRequest) {
       try {
         await firebase
           .auth()
-          .signInWithEmailAndPassword(this.email, this.password);
+          .signInWithEmailAndPassword(
+            loginRequest.email,
+            loginRequest.password
+          );
+        console.log("signed in");
+        this.$router.push("/");
       } catch (error) {
         console.log(error);
+        this.flash(error.message, "error", { timeout: 10000 });
       }
     }
   }

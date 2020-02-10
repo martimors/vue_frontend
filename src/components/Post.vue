@@ -20,6 +20,4 @@ h3.headline {
   font-family: "Open Sans", sans-serif;
   padding: 2em 0 0 0;
 }
-.content {
-}
 </style>
