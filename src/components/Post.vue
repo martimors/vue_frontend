@@ -18,6 +18,6 @@ p#created {
 }
 h3.headline {
   font-family: "Open Sans", sans-serif;
-  padding: 2em 0 0 0;
+  padding: 2vh 0 0 0;
 }
 </style>

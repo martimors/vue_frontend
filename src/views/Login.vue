@@ -1,13 +1,17 @@
 <template>
   <div class="login-view">
-    <LoginForm v-on:request-login="loginUser" />Don't have a user?
-    <router-link :to="{name: 'Register'}">Register</router-link>!
+    <div v-if="!user.loggedIn">
+      <LoginForm v-on:request-login="loginUser" />Don't have a user?
+      <router-link :to="{name: 'Register'}">Register</router-link>!
+    </div>
+    <div v-else>Currently logged in as: {{user.data.displayName}} ({{user.data.displayName}}) {{user.data.isAdmin}}</div>
     <flash-message />
   </div>
 </template>
 <script>
-import firebase from "firebase";
 import LoginForm from "@/components/LoginForm";
+import { mapGetters } from "vuex";
+import { auth } from "@/firebase";
 export default {
   name: "login",
   components: { LoginForm },
@@ -17,27 +21,22 @@ export default {
       password: ""
     };
   },
-  created() {
-    firebase.auth().onAuthStateChanged(async userAuth => {
-      if (userAuth) {
-        const tokenResult = await firebase
-          .auth()
-          .currentUser.getIdTokenResult();
-        console.log(tokenResult.claims);
-      } else {
-        console.log("!");
-      }
-    });
+  computed: {
+    ...mapGetters({
+      // map `this.user` to `this.$store.getters.user`
+      user: "user"
+    })
   },
   methods: {
     async loginUser(loginRequest) {
+      // Get the isAdmin claim if possible
+
+      // Log the user in
       try {
-        await firebase
-          .auth()
-          .signInWithEmailAndPassword(
-            loginRequest.email,
-            loginRequest.password
-          );
+        await auth.signInWithEmailAndPassword(
+          loginRequest.email,
+          loginRequest.password
+        );
         console.log("signed in");
         this.$router.push("/");
       } catch (error) {
