@@ -8,6 +8,7 @@ Vue.use(VueRouter);
 
 // lazy import for "complex" pages (they load separately)
 const posts = () => import(/* webpackChunkName: "about" */ "../views/Blog.vue");
+const adminconsole = () => import("@/views/Admin");
 
 const routes = [
   {
@@ -32,6 +33,11 @@ const routes = [
     path: "/",
     name: "posts",
     component: posts
+  },
+  {
+    path: "/configure",
+    name: "adminconsole",
+    component: adminconsole
   },
   {
     path: "*",

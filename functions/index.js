@@ -9,18 +9,27 @@ admin.initializeApp();
 //  response.send("Hello from Firebase!");
 // });
 
-exports.addDefaultUserRole = functions.region("europe-west1").auth.user().onCreate(async user => {
-  /**
-   * This sets the claim isAdmin to false for all new users.
-   */
-  let uid = user.uid;
+exports.addDefaultUserRole = functions
+  .region("europe-west1")
+  .auth.user()
+  .onCreate(async user => {
+    /**
+     * This sets the claim isAdmin to false for all new users.
+     */
+    let uid = user.uid;
 
-  //add custom claims
-  await admin.auth().setCustomUserClaims(uid, {
-    isAdmin: false
+    //add custom claims
+    await admin.auth().setCustomUserClaims(uid, {
+      isAdmin: false
+    });
+    const userRecord = await admin.auth().getUser(uid);
+    console.log(uid);
+    console.log(userRecord.customClaims.isAdmin);
+    return null;
   });
-  const userRecord = await admin.auth().getUser(uid);
-  console.log(uid);
-  console.log(userRecord.customClaims.isAdmin);
-  return null;
-});
+
+//Function to retrieve a user by email
+exports.getUser = functions
+  .https.onCall((data, context) => {
+    return { message: "Hello World!" };
+  });
