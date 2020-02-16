@@ -1,6 +1,6 @@
 <template>
   <div id="posts">
-    <button
+    <button v-if="user.claims.isAdmin"
       v-show="!formVisible"
       v-on:click="showForm"
       class="btn btn-primary btn-sm btn-block"
@@ -15,12 +15,19 @@ import Posts from "../components/Posts";
 import NewPost from "../components/NewPost";
 import { db } from "@/firebase";
 import { Timestamp } from "@/firebase";
+import { mapGetters } from "vuex";
 
 export default {
   name: "Blog",
   components: {
     Posts,
     NewPost
+  },
+  computed: {
+    ...mapGetters({
+      // map `this.user` to `this.$store.getters.user`
+      user: "user"
+    })
   },
   data() {
     return {

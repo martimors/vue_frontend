@@ -1,11 +1,14 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import { auth } from "@/firebase";
+
 Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     user: {
       loggedIn: false,
-      data: null
+      data: null,
+      claims: null
     }
   },
   getters: {
@@ -19,6 +22,9 @@ export default new Vuex.Store({
     },
     SET_USER(state, data) {
       state.user.data = data;
+    },
+    SET_CLAIMS(state, claims) {
+      state.user.claims = claims;
     }
   },
   actions: {
@@ -28,7 +34,12 @@ export default new Vuex.Store({
         commit("SET_USER", {
           displayName: user.displayName,
           email: user.email,
-          isAdmin: user.isAdmin
+          arne: user.isAdmin
+        });
+        auth.currentUser.getIdTokenResult().then(idTokenResult => {
+          commit("SET_CLAIMS", {
+            claims: { isAdmin: idTokenResult.claims.isAdmin }
+          });
         });
       } else {
         commit("SET_USER", null);
