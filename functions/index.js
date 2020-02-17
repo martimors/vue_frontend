@@ -29,7 +29,15 @@ exports.addDefaultUserRole = functions
   });
 
 //Function to retrieve a user by email
-exports.getUser = functions
-  .https.onCall((data, context) => {
-    return { message: "Hello World!" };
-  });
+exports.getUser = functions.https.onCall(async (data, context) => {
+  try {
+    const userRecord = await admin.auth().getUserByEmail(data.email);
+    return { message: userRecord };
+  } catch (error) {
+    return { message: error };
+  }
+});
+
+exports.promoteUserToAdmin = functions.https.onCall(
+  async (data, context) => {}
+);

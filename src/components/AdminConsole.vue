@@ -37,19 +37,16 @@ export default {
     };
   },
   methods: {
-    get_other_user(e) {
+    async get_other_user(e) {
       e.preventDefault();
       var getUser = functions.httpsCallable("getUser");
-      getUser({ email: this.email })
-        .then(result => {
-          // Read result of the Cloud Function.
-          this.result = result.data.message;
-          console.log(result.data.message);
-          // ...
-        })
-        .catch(error => {
-          console.log(error);
-        });
+      try {
+        let result = await getUser({ email: this.email });
+        this.result = result.data.message;
+        console.log(result.data.message);
+      } catch (error) {
+        console.log(error);
+      }
     }
   }
 };

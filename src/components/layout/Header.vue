@@ -2,7 +2,7 @@
   <header class="header">
     <div id="currentuser_container">
       <div id="currentuser" v-if="user.loggedIn">
-        Logged in as: {{user.data.displayName}} {{user.data}} {{user.claims}}
+        Logged in as: {{user.data.displayName}}
         <a @click.prevent="signOut">Sign out</a>
       </div>
     </div>

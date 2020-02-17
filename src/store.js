@@ -38,7 +38,7 @@ export default new Vuex.Store({
         });
         auth.currentUser.getIdTokenResult().then(idTokenResult => {
           commit("SET_CLAIMS", {
-            claims: { isAdmin: idTokenResult.claims.isAdmin }
+            isAdmin: idTokenResult.claims.isAdmin
           });
         });
       } else {
