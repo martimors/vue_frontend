@@ -30,14 +30,35 @@ exports.addDefaultUserRole = functions
 
 //Function to retrieve a user by email
 exports.getUser = functions.https.onCall(async (data, context) => {
-  try {
-    const userRecord = await admin.auth().getUserByEmail(data.email);
-    return { message: userRecord };
-  } catch (error) {
-    return { message: error };
+  const currentUser = await admin.auth().getUser(data.uid);
+  const userToChange = await admin.auth().getUserByEmail(data.email);
+  if (currentUser.customClaims.isAdmin) {
+    return {
+      displayName: userToChange.displayName,
+      email: userToChange.email,
+      isAdmin: userToChange.customClaims.isAdmin
+    };
+  } else {
+    throw new Error("Needs admin to change admin privileges!");
   }
 });
 
-exports.promoteUserToAdmin = functions.https.onCall(
-  async (data, context) => {}
-);
+exports.toggleAdmin = functions.https.onCall(async (data, context) => {
+  const currentUser = await admin.auth().getUser(data.uid);
+  const userToChange = await admin.auth().getUserByEmail(data.email);
+  let userHasAdmin = await userToChange.customClaims.isAdmin;
+  if (userToChange.email === functions.config().admin.email) {
+    throw new Error("Cannot change admin status of superuser");
+  } else if (currentUser.customClaims.isAdmin) {
+    await admin.auth().setCustomUserClaims(userToChange.uid, {
+      isAdmin: !userHasAdmin
+    });
+    return {
+      displayName: userToChange.displayName,
+      email: userToChange.email,
+      isAdmin: !userHasAdmin
+    };
+  } else {
+    throw new Error("Needs admin to change admin privileges!");
+  }
+});
