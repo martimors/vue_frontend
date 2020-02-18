@@ -1,11 +1,13 @@
 <template>
   <div id="posts">
-    <button
-      v-if="user.claims.isAdmin"
-      v-show="!formVisible"
-      v-on:click="showForm"
-      class="btn btn-primary btn-sm btn-block"
-    >Add post</button>
+    <div v-if="user.loggedIn">
+      <button
+        v-if="user.isAdmin"
+        v-show="!formVisible"
+        v-on:click="showForm"
+        class="btn btn-primary btn-sm btn-block"
+      >Add post</button>
+    </div>
     <NewPost v-show="formVisible" v-on:add-post="addPost" />
     <Posts v-bind:posts="posts" />
   </div>

@@ -20,7 +20,8 @@ export default {
       user: "user"
     }),
     isAdmin: function checkAdmin() {
-      return this.user;
+      console.log(this.user)
+      return this.user.isAdmin;
     }
   }
 };
