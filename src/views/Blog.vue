@@ -1,6 +1,7 @@
 <template>
   <div id="posts">
-    <button v-if="user.claims.isAdmin"
+    <button
+      v-if="user.claims.isAdmin"
       v-show="!formVisible"
       v-on:click="showForm"
       class="btn btn-primary btn-sm btn-block"
