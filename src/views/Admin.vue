@@ -1,7 +1,7 @@
 <template>
   <div class="admin">
     <div v-if="user.loggedIn">
-      <AdminConsole v-if="isAdmin" />
+      <AdminConsole v-if="user.claims.isAdmin" />
     </div>
   </div>
 </template>

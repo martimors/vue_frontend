@@ -2,6 +2,7 @@ import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
 import "firebase/functions";
+import "firebase/storage";
 import store from "./store";
 
 const projectId = process.env.VUE_APP_PROJECT_ID;
@@ -23,6 +24,7 @@ firebase.auth().onAuthStateChanged(user => {
 export const db = firebase.firestore();
 export const auth = firebase.auth();
 export const functions = firebase.functions();
+export const storage = firebase.storage();
 
 // Export types that exists in Firestore
 // This is not always necessary, but it's used in other examples

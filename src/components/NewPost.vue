@@ -31,6 +31,19 @@
           ></textarea>
         </div>
       </div>
+      <!-- File Button -->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="filebutton">Upload an image</label>
+        <div class="col-md-4">
+          <input
+            id="filebutton"
+            name="filebutton"
+            class="input-file"
+            type="file"
+            required="required"
+          />
+        </div>
+      </div>
       <div class="form-group row">
         <div class="offset-2 col-10">
           <button name="submit" type="submit" class="btn btn-primary">Post</button>
@@ -47,7 +60,9 @@ export default {
   data() {
     return {
       title: "",
-      body: ""
+      body: "",
+      imageURL: "",
+      imageData: null
     };
   },
   methods: {

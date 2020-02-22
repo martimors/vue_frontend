@@ -2,7 +2,7 @@
   <div id="posts">
     <div v-if="user.loggedIn">
       <button
-        v-if="user.isAdmin"
+        v-if="user.claims.isAdmin"
         v-show="!formVisible"
         v-on:click="showForm"
         class="btn btn-primary btn-sm btn-block"
