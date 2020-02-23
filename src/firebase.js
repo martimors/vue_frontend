@@ -29,3 +29,4 @@ export const storage = firebase.storage();
 // Export types that exists in Firestore
 // This is not always necessary, but it's used in other examples
 export const Timestamp = firebase.firestore;
+export const TaskState = firebase.storage.TaskState;

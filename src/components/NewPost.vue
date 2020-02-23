@@ -41,6 +41,8 @@
             class="input-file"
             type="file"
             required="required"
+            @change="uploadImage"
+            accept="image/jpeg"
           />
         </div>
       </div>
@@ -61,19 +63,23 @@ export default {
     return {
       title: "",
       body: "",
-      imageURL: "",
       imageData: null
     };
   },
   methods: {
     addPost(e) {
       e.preventDefault();
+      console.log(e);
       const newPost = {
         title: this.title.trim().substring(0, 30),
-        body: this.body.trim().substring(0, 256)
+        body: this.body.trim().substring(0, 256),
+        imageData: this.imageData
       };
       // Send up to parent
       this.$emit("add-post", newPost);
+    },
+    uploadImage(e) {
+      this.imageData = e.target.files[0];
     }
   }
 };
